@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddTodoAction } from './actions/TodoActions';
+import { AddTodoAction, RemoveTodoAction } from './actions/TodoActions';
 import './App.css';
 
 function App() {
@@ -14,6 +14,10 @@ function App() {
     e.preventDefault();
     dispatch(AddTodoAction(todo))
 
+  }
+
+  const removeHandler = (t) => {
+    dispatch(RemoveTodoAction(t));
   }
 
   return (
@@ -46,7 +50,7 @@ function App() {
             todos && todos.map((t) => (
               <li className='singleTodo' key={t.id}>
                 <span className='todoText'>{t.todo}</span>
-                <button style={{
+                <button onClick={() => removeHandler(t)} style={{
                   borderRadius: 25,
                   padding: 10,
                   border: "1px solid white",
